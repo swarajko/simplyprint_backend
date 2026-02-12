@@ -28,50 +28,11 @@ A FastAPI microservice for orchestrating printers, print queues, real-time monit
 - RabbitMQ/Kafka message broker
 - SimplyPrint API credentials
 
-### Installation
-
-```bash
-git clone <repo-url>
-cd onground-backend
-cp .env.example .env
-pip install -r requirements.txt
-```
 
 ### Configuration
 
 Edit `.env` file with your environment-specific settings:
 
-```bash
-# Database
-REDIS_URL=redis://localhost:6379
-DATABASE_URL=postgresql://user:password@localhost/printfarm
-
-# Message Broker
-RABBITMQ_URL=amqp://guest:guest@localhost:5672/
-KAFKA_BROKERS=localhost:9092
-
-# SimplyPrint API
-SIMPLYPRINT_API_KEY=your_api_key_here
-SIMPLYPRINT_BASE_URL=https://api.simplyprint.io
-
-# Storage
-MEDIA_STORAGE_PATH=/opt/printfarm/media
-LOG_LEVEL=INFO
-
-# Security
-JWT_SECRET_KEY=your_jwt_secret_here
-API_KEY_HEADER=X-API-Key
-```
-
-### Running the Service
-
-```bash
-# Development
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-# Production
-gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app
-```
 
 ### API Documentation
 
@@ -147,40 +108,7 @@ This project uses:
 - **Flake8** for linting
 - **mypy** for type checking
 
-Run code quality checks:
 
-```bash
-# Format code
-black app tests
-isort app tests
-
-# Lint
-flake8 app tests
-mypy app
-```
-
-### Testing
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=app --cov-report=html
-
-# Run specific test module
-pytest tests/unit/test_printer_service.py
-```
-
-### Database Migrations
-
-```bash
-# Create migration
-alembic revision --autogenerate -m "Add new table"
-
-# Apply migrations
-alembic upgrade head
-```
 
 ## Deployment
 
