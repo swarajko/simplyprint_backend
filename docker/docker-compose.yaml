@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5435:5432"  # Maps host port 5435 to container's 5432
+    environment:
+      POSTGRES_DB: printfarm_onground
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+  onground-backend:
+    # ... build section
+    ports:
+      - "4000:4000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/printfarm_onground
+      - HOST=0.0.0.0
+      - PORT=4000
+    depends_on:
+      - db
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "4000"]
